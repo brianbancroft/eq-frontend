@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { Row, Table } from 'react-bootstrap'
 import axios from 'axios'
+import Moment from 'react-moment'
 
 class TableRow extends Component {
   render () {
     return (
-      <tr><td>{this.props.date}</td><td>{this.props.events}</td></tr>
+      <tr><td><Moment date={this.props.date} format="DD/MM/YYYY" /></td><td>{this.props.events}</td></tr>
     )
   }
 }
