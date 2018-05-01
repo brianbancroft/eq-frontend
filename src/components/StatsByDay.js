@@ -2,15 +2,7 @@ import React, { Component } from 'react'
 import { Row, Table } from 'react-bootstrap'
 import axios from 'axios'
 import Moment from 'react-moment'
-import BarChart from './BarChart'
-
-
-const TableRow = props => <tr>
-  <td><Moment date={props.date} format="DD/MM/YYYY"/></td>
-  <td>{props.impressions}</td>
-  <td>{props.clicks}</td>
-  <td>{props.revenue}</td>
-</tr>
+// import BarChart from './BarChart'
 
 class Events extends Component {
   constructor (props) {
@@ -19,9 +11,15 @@ class Events extends Component {
       tableRows: []
     }
 
-    const tableRow = (el, i) => <TableRow date={el.date} impressions={el.impressions} clicks={el.clicks} revenue={el.clicks} key={i} />
+    const TableRow = props => <tr>
+      <td><Moment date={props.date} format="DD/MM/YYYY"/></td>
+      <td>{props.impressions}</td>
+      <td>{props.clicks}</td>
+      <td>{props.revenue}</td>
+    </tr>
+    const constructTableRow = (el, i) => <TableRow date={el.date} impressions={el.impressions} clicks={el.clicks} revenue={el.clicks} key={i} />
     const setupData = resp => {
-      this.setState({tableRows: resp.data.map(tableRow)})
+      this.setState({tableRows: resp.data.map(constructTableRow)})
       // TODO: Resolve date string issue:
       // this.setState({chartData: { labels: resp.data.map(i => i.date), data: resp.data.map(i => i.events)}})
     }

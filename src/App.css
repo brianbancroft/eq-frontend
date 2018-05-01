@@ -41,3 +41,13 @@
 .dataviz-view {
   min-height: 300px;
 }
+
+.link-switch {
+  display: flex;
+  justify-content: space-around;
+  padding: 0 50px;
+}
+
+.display-dot {
+  width: 20%;
+}

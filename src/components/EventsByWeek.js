@@ -5,8 +5,6 @@ import Moment from 'react-moment'
 import BarChart from './BarChart'
 
 
-const TableRow = props => <tr><td><Moment date={props.date} format="DD/MM/YYYY"/></td><td>{props.events}</td></tr>
-
 class Events extends Component {
   constructor (props) {
     super(props)
@@ -14,9 +12,15 @@ class Events extends Component {
       tableRows: []
     }
 
-    const tableRow = (el, i) => <TableRow date={el.date} events={el.events} key={i} />
+    const TableRow = props =>
+      <tr onClick={() => this.props.history.push(`/event/${props.date}`)}>
+        <td><Moment date={props.date} format="DD/MM/YYYY"/></td>
+        <td>{props.events}</td>
+      </tr>
+
+    const generateTablerow = (el, i) => <TableRow date={el.date} events={el.events} key={i} />
     const setupData = resp => {
-      this.setState({tableRows: resp.data.map(tableRow)})
+      this.setState({tableRows: resp.data.map(generateTablerow)})
       // TODO: Resolve date string issue:
       this.setState({chartData: { labels: resp.data.map(i => i.date), data: resp.data.map(i => i.events)}})
     }
