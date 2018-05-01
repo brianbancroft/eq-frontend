@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import { Grid, Row, Col } from 'react-bootstrap'
 
-import './App.css';
+import './App.css'
 
 import Body from './components/Body'
 import Events from './components/Events'
@@ -51,4 +51,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default App

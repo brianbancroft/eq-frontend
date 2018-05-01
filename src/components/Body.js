@@ -6,7 +6,7 @@ class Body extends Component {
       <div className="body">
         hello body
       </div>
-    );
+    )
 }
 
 }

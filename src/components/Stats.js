@@ -17,7 +17,7 @@ class Stats extends Component {
 
         </Row>
       </div>
-    );
+    )
 }
 
 }
