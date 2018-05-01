@@ -4,6 +4,7 @@ import axios from 'axios'
 import Moment from 'react-moment'
 import BarChart from './BarChart'
 
+
 const TableRow = props => <tr><td><Moment date={props.date} format="DD/MM/YYYY"/></td><td>{props.events}</td></tr>
 
 class Events extends Component {
@@ -16,7 +17,8 @@ class Events extends Component {
     const tableRow = (el, i) => <TableRow date={el.date} events={el.events} key={i} />
     const setupData = resp => {
       this.setState({tableRows: resp.data.map(tableRow)})
-      this.setState({chartData: { dateLabels: resp.data.map(i => i.date), data: resp.data.map(i => i.events)}})
+      // TODO: Resolve date string issue:
+      this.setState({chartData: { labels: resp.data.map(i => i.date), data: resp.data.map(i => i.events)}})
     }
 
     axios
