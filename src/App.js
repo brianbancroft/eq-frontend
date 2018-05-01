@@ -1,15 +1,21 @@
 import React, { Component } from 'react'
 import './App.css';
+import { Grid, Row, Col } from 'react-bootstrap'
 import Body from './components/Body'
-import Sidenav from './components/Sidenav'
 
 class App extends Component {
   render() {
     return (
-      <div className="app">
-        <Sidenav />
-        <Body />
-      </div>
+      <Grid>
+        <Row>
+          <Col xs={4} md={3} className="side-nav">
+            Hello sidenav
+          </Col>
+          <Col xs={8} md={9}>
+            <Body />
+          </Col>
+        </Row>
+      </Grid>
     )
   }
 }
