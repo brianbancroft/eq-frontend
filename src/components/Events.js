@@ -3,13 +3,7 @@ import { Row, Table } from 'react-bootstrap'
 import axios from 'axios'
 import Moment from 'react-moment'
 
-class TableRow extends Component {
-  render () {
-    return (
-      <tr><td><Moment date={this.props.date} format="DD/MM/YYYY" /></td><td>{this.props.events}</td></tr>
-    )
-  }
-}
+const TableRow = props => <tr><td><Moment date={props.date} format="DD/MM/YYYY"/></td><td>{props.events}</td></tr>
 
 class Events extends Component {
   constructor (props) {
@@ -17,33 +11,36 @@ class Events extends Component {
     this.state = {
       tableRows: []
     }
-  }
 
-  render () {
-    const tableRow = el => <TableRow date={el.date} events={el.events} />
+    const tableRow = (el, i) => <TableRow date={el.date} events={el.events} key={i} />
     const setupData = resp => this.setState({tableRows: resp.data.map(tableRow)})
 
     axios
       .get('http://localhost:5555/events/daily')
       .then(setupData)
+  }
+
+  render () {
+    const WeeklyEventsTable = () =>
+      <Row className="table-view table-view__weekly">
+        <h2>Weekly Events Table</h2>
+        <Table striped bordered condensed hover>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Events</th>
+            </tr>
+          </thead>
+          <tbody>
+            { this.state.tableRows }
+          </tbody>
+        </Table>
+      </Row>
 
     return(
       <div className="stats-view">
         <Row className="dataviz-view">Databiz</Row>
-        <Row className="table-view">
-          <h2>Daily Events Table</h2>
-          <Table striped bordered condensed hover>
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Events</th>
-              </tr>
-            </thead>
-            <tbody>
-              { this.state.tableRows }
-            </tbody>
-          </Table>
-        </Row>
+        <WeeklyEventsTable />
       </div>
     )
   }

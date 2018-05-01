@@ -33,3 +33,11 @@
   user-select: none;
   border: 1px solid #555;
 }
+
+.table-view {
+  padding: 0 20px;
+}
+
+.dataviz-view {
+  min-height: 300px;
+}
