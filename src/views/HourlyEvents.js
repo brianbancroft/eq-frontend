@@ -2,20 +2,19 @@ import React, { Component } from 'react'
 import { Row, Table } from 'react-bootstrap'
 import axios from 'axios'
 import Moment from 'react-moment'
-import BarChart from './BarChart'
-
+import BarChart from '../components/BarChart'
 
 class Events extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      tableRows: []
+      date: this.props.location.pathname.split('/events/')[1],
+      tableRows: [],
     }
 
     const TableRow = props =>
-      <tr onClick={() => this.props.history.push(`/event/${props.date}`)}>
-        <td><Moment date={props.date} format="DD/MM/YYYY"/></td>
-        <td>{props.events}</td>
+      <tr>
+        <td><Moment date={props.date} format="DD/MM/YYYY"/></td><td>{props.events}</td>
       </tr>
 
     const generateTablerow = (el, i) => <TableRow date={el.date} events={el.events} key={i} />
@@ -26,14 +25,16 @@ class Events extends Component {
     }
 
     axios
-      .get('http://localhost:5555/events/daily')
+      .get(`http://localhost:5555/events/hourly?date=${this.state.date}`)
       .then(setupData)
   }
 
   render () {
+    const BackButton = props => <div className="back-button" onClick={() => this.props.history.push('/events')}>Go back to weekly view</div>
+
     const WeeklyEventsTable = () =>
       <Row className="table-view table-view__weekly">
-        <h2>Weekly Events Table</h2>
+        <h2>Daily Events Table</h2>
         <Table striped bordered condensed hover>
           <thead>
             <tr>
@@ -50,6 +51,7 @@ class Events extends Component {
     return(
       <div className="stats-view">
         <BarChart chartData={this.state.chartData} />
+        <BackButton />
         <WeeklyEventsTable />
       </div>
     )

@@ -4,10 +4,10 @@ import { Grid, Row, Col } from 'react-bootstrap'
 
 import './App.css'
 
-import EventsByWeek from './components/EventsByWeek'
-import EventsByDay from './components/EventsByDay'
-import StatsByWeek from './components/StatsByWeek'
-import StatsByDay from './components/StatsByDay'
+import DailyEvents from './views/DailyEvents'
+import HourlyEvents from './views/HourlyEvents'
+import DailyStats from './views/DailyStats'
+import HourlyStats from './views/HourlyStats'
 
 
 class App extends Component {
@@ -49,10 +49,10 @@ class App extends Component {
               <Route exact path="/">
                 <h1>Basic UI for API Consumption</h1>
               </Route>
-              <Route path="/events/daily" component={EventsByWeek} />
-              <Route path="/events/hourly" component={EventsByDay} />
-              <Route path="/stats/daily" component={StatsByWeek} />
-              <Route path="/stats/hourly" component={StatsByDay} />
+              <Route path="/events/daily" component={DailyEvents} />
+              <Route path="/events/hourly" component={HourlyEvents} />
+              <Route path="/stats/daily" component={DailyStats} />
+              <Route path="/stats/hourly" component={HourlyStats} />
             </Col>
           </Row>
         </Grid>
