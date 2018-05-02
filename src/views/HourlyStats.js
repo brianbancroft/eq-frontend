@@ -8,7 +8,7 @@ import DatavizSelector from '../components/DatavizSelector'
 import HourlyStatsTable from '../components/HourlyStatsTable'
 
 class Events extends Component {
-  setCharts (date, impressions, clicks, revenue, hour) {
+  setRowSummaryPane (date, impressions, clicks, revenue, hour) {
     const revenuePerImpression = (revenue, impression) => {
       return Math.round(Number(revenue) / Number(impressions) * 10000) / 10000
     }
@@ -30,7 +30,7 @@ class Events extends Component {
     return(
       <tr
         key={props.key}
-        onClick={() => this.setCharts(props.date, props.impressions, props.clicks, props.revenue, props.hour)}
+        onClick={() => this.setRowSummaryPane(props.date, props.impressions, props.clicks, props.revenue, props.hour)}
       >
         <td className="column-date">
           <Moment date={props.date} format="DD/MM/YYYY"/>
@@ -64,8 +64,15 @@ class Events extends Component {
     }
 
     const setupData = resp => {
-      this.setState({tableRows: resp.data.map(constructTableRow),})
       this.setState({
+        tableRows: resp.data.map(constructTableRow),
+        baseChartData: {
+          impressions: resp.data.map(i => i.impressions),
+          clicks: resp.data.map(i => i.clicks),
+          revenue: resp.data.map(i => i.revenue),
+          clicksPerImpression: resp.data.map(i => Number(i.clicks) / Number(i.impressions)),
+          revenuePerImpression: resp.data.map(i => Number(i.revenue) / Number(i.impressions)),
+        },
         chartData: {
           labels: resp.data.map(i => `${i.hour}h, ${i.clean_date}`),
           data: resp.data.map(i => i['impressions']),
@@ -95,17 +102,32 @@ class Events extends Component {
       })
     }
 
-    const selectTimeSeries = () => this.setState({selectedView: <TimeSeries />,})
+    const selectTimeSeries = subject => {
+      this.setState({
+        selectedView: <TimeSeries />,
+        baseChartData: this.state.baseChartData,
+        chartData: {
+          labels: this.state.chartData.labels,
+          data: this.state.baseChartData[subject],
+          subject: subject,
+        },
+      })
+    }
 
     const setupData = resp => {
       this.setState({
         tableRows: resp.data.map(constructTableRow),
+        baseChartData: {
+          impressions: resp.data.map(i => i.impressions),
+          clicks: resp.data.map(i => i.clicks),
+          revenue: resp.data.map(i => i.revenue),
+        },
         chartData: {
-          labels: resp.data.map(i => `${i.hour}h, ${i.clean_date}`),data: resp.data.map(i => i['impressions']),
+          labels: resp.data.map(i => `${i.hour}h, ${i.clean_date}`),
+          data: resp.data.map(i => i['impressions']),
           subject: 'impressions',
         },
       })
-      this.setState()
     }
 
     const sortColumn = column => {

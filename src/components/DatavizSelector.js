@@ -9,8 +9,8 @@ class DatavizSelector extends Component {
         <Button bsStyle="primary" onClick={() => this.props.selectTimeSeries('clicks')}>Total Clicks</Button>
         <Button bsStyle="primary" onClick={() => this.props.selectTimeSeries('revenue')}>Total Revenue</Button>
 
-        <Button bsStyle="primary" onClick={() => this.props.selectTimeSeries()}>Clicks per Impression</Button>
-        <Button bsStyle="primary" onClick={() => this.props.selectTimeSeries()}>Average Revenue per Impression</Button>
+        <Button bsStyle="primary" onClick={() => this.props.selectTimeSeries('clicksPerImpression')}>Clicks per Impression</Button>
+        <Button bsStyle="primary" onClick={() => this.props.selectTimeSeries('revenuePerImpression')}>Average Revenue per Impression</Button>
       </div>
     )
   }
