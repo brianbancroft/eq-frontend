@@ -87,5 +87,10 @@ th.header-toggle:hover {
 .dataviz-view__dataviz-selector {
   display: flex;
   flex-direction: row;
+  overflow-x: scroll;
   justify-content: space-around;
+}
+
+.dataviz-view__dataviz-selector button {
+  margin-right: 30px;
 }

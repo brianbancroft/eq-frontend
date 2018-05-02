@@ -2,34 +2,25 @@ import React, { Component } from 'react'
 import { Row, Table, Button } from 'react-bootstrap'
 import axios from 'axios'
 import Moment from 'react-moment'
-// import BarChart from './BarChart'
-
-
-const TimeSeries = props => <div>
-  <h1>Time Series</h1>
-</div>
-
-const RowStats = props => <div>
-  <h1>Row Stats</h1>
-</div>
+import BarChart from '../components/BarChart'
+import RowAnalysis from '../components/RowAnalysis'
 
 class Events extends Component {
   setCharts(date, impressions, clicks, revenue, hour) {
-    console.log('set charts called')
     this.setState({
       renderSpecialCharts: true,
-      specialChartData: {
-        hour: hour,
-        date: date,
-        clicks: clicks,
-        revenue: revenue,
-        impressions: impressions,
-      }
+      selectedView: <RowAnalysis
+        hour={hour}
+        date={date}
+        clicks={clicks}
+        revenue={revenue}
+        impressions={impressions}
+      />,
     })
   }
 
   tableRow (props) {
-    return <tr onClick={() => this.setCharts(props.date, props.impressions, props.clicks, props.revenue, props.hour)}>
+    return <tr key={props.key} onClick={() => this.setCharts(props.date, props.impressions, props.clicks, props.revenue, props.hour)}>
       <td className="column-date"><Moment date={props.date} format="DD/MM/YYYY"/></td>
       <td className="column-hour">{props.hour}</td>
       <td className="column-impressions">{props.impressions}</td>
@@ -38,17 +29,9 @@ class Events extends Component {
     </tr>
   }
 
-  selectTimeSeries () {
-    console.log('method selectTimeSeries called')
-    this.setState({selectedView: <TimeSeries />})
-  }
-  selectRowStats () {
-    console.log('method selectRowStats called')
-    this.setState({selectedView: <RowStats />})
-  }
+
 
   constructor (props) {
-
     super(props)
     this.state = {
       tableRows: []
@@ -78,7 +61,10 @@ class Events extends Component {
   }
 
   render () {
+    const TimeSeries = props => <BarChart chartData={this.state.chartData} />
+
     const constructTableRow = (el, i) => {
+
       const revenue = Math.round(Number(el.revenue) * 100) / 100
       return this.tableRow({
         date: el.date,
@@ -91,9 +77,17 @@ class Events extends Component {
       })
     }
 
+    const selectTimeSeries = () => this.setState({selectedView: <TimeSeries />})
+
     const setupData = resp => {
-      this.setState({tableRows: resp.data.map(constructTableRow)})
-      this.setState({chartData: { labels: resp.data.map(i => `${i.hour}h, ${i.clean_date}`), data: resp.data.map(i => i.events)}})
+      this.setState({
+        tableRows: resp.data.map(constructTableRow),
+        selectedView: <TimeSeries />,
+        chartData: {
+          labels: resp.data.map(i => `${i.hour}h, ${i.clean_date}`),data: resp.data.map(i => i.events),
+        },
+      })
+      this.setState()
     }
 
 
@@ -130,8 +124,13 @@ class Events extends Component {
             {this.state.selectedView}
           </div>
           <div className="dataviz-view__dataviz-selector">
-            <Button bsStyle="primary" onClick={() => this.selectTimeSeries()}>Time Series</Button>
-            <Button bsStyle="primary" onClick={() => this.selectRowStats()}>Row Analysis</Button>
+            <Button bsStyle="primary" onClick={() => selectTimeSeries()}>Total Impressions</Button>
+            <Button bsStyle="primary" onClick={() => selectTimeSeries()}>Total Clicks</Button>
+            <Button bsStyle="primary" onClick={() => selectTimeSeries()}>Total Revenue</Button>
+
+            <Button bsStyle="primary" onClick={() => selectTimeSeries()}>Clicks per Impression</Button>
+            <Button bsStyle="primary" onClick={() => selectTimeSeries()}>Average Revenue per Impression</Button>
+            <Button bsStyle="primary">Row Analysis</Button>
           </div>
         </div>
         <DailyStatsTable />

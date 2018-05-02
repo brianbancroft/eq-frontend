@@ -21,7 +21,7 @@ class App extends Component {
               <div className="site-title">
                 <h3>Maps and Tables</h3>
 
-                <img src="https://cdn.brianbancroft.io/images/eqworks/scale.svg" alt="Some image of a scale"/>
+                <img src="https://cdn.brianbancroft.io/images/eqworks/scale.svg" alt="A scale"/>
               </div>
 
               <div className="link-container">
