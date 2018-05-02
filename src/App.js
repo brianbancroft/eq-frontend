@@ -8,6 +8,7 @@ import DailyEvents from './views/DailyEvents'
 import HourlyEvents from './views/HourlyEvents'
 import DailyStats from './views/DailyStats'
 import HourlyStats from './views/HourlyStats'
+import HourlyEventsMap from './views/HourlyEventsMap'
 
 
 class App extends Component {
@@ -35,6 +36,11 @@ class App extends Component {
                   <div className="divider-dot">·</div>
                   <Link to="/events/hourly">Hourly</Link>
                 </div>
+                <div className="link events-link">
+                  <Link to="/events/hourlymap">
+                    Event Count Map
+                  </Link>
+                </div>
                 <div className="link stats-link">
                   <Link to="/stats/daily">
                     Stats
@@ -53,6 +59,7 @@ class App extends Component {
               </Route>
               <Route path="/events/daily" component={DailyEvents} />
               <Route path="/events/hourly" component={HourlyEvents} />
+              <Route path="/events/hourlymap" component={HourlyEventsMap} />
               <Route path="/stats/daily" component={DailyStats} />
               <Route path="/stats/hourly" component={HourlyStats} />
             </Col>
