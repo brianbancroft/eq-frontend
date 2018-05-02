@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { ListGroup, ListGroupItem, Badge } from 'react-bootstrap'
+import React, { Component, } from 'react'
+import { ListGroup, ListGroupItem, Badge, } from 'react-bootstrap'
 
 class RowAnalysis extends Component {
   render () {

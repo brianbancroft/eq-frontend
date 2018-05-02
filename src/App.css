@@ -89,6 +89,7 @@ th.header-toggle:hover {
   flex-direction: row;
   overflow-x: scroll;
   justify-content: space-around;
+  padding-left: 220px;
   padding-bottom: 15px;
   scroll-behavior: initial;
 }

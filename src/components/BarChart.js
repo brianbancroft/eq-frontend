@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { Bar } from 'react-chartjs-2'
+import React, { Component, } from 'react'
+import { Bar, } from 'react-chartjs-2'
 
 class Stats extends Component {
   render () {
@@ -26,7 +26,7 @@ class Stats extends Component {
         height={300}
         options={{
           maintainAspectRatio: false,
-          responsive: false
+          responsive: false,
         }}
       />
     }
