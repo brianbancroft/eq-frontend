@@ -1,8 +1,19 @@
 import React, { Component } from 'react'
-import { Row, Table } from 'react-bootstrap'
+import { Row, Table, Button } from 'react-bootstrap'
 import axios from 'axios'
 import Moment from 'react-moment'
 // import BarChart from './BarChart'
+
+
+const TimeSeries = props => <div>
+  <h1>Time Series</h1>
+</div>
+
+const RowStats = props => <div>
+  <h1>Row Stats</h1>
+</div>
+
+let selectedView = <TimeSeries />
 
 class Events extends Component {
   setCharts(date, impressions, clicks, revenue, hour) {
@@ -16,6 +27,16 @@ class Events extends Component {
     }})
   }
 
+  tableRow (props) {
+    return <tr onClick={() => this.setCharts(props.date, props.impressions, props.clicks, props.revenue, props.hour)}>
+      <td className="column-date"><Moment date={props.date} format="DD/MM/YYYY"/></td>
+      <td className="column-hour">{props.hour}</td>
+      <td className="column-impressions">{props.impressions}</td>
+      <td className="column-clicks">{props.clicks}</td>
+      <td className="column-revenue">{props.revenue}</td>
+    </tr>
+  }
+
   constructor (props) {
 
     super(props)
@@ -23,25 +44,17 @@ class Events extends Component {
       tableRows: []
     }
 
-    const TableRow = props => <tr onClick={() => this.setCharts(props.date, props.impressions, props.clicks, props.revenue, props.hour)}>
-      <td className="column-date"><Moment date={props.date} format="DD/MM/YYYY"/></td>
-      <td className="column-hour">{props.hour}</td>
-      <td className="column-impressions">{props.impressions}</td>
-      <td className="column-clicks">{props.clicks}</td>
-      <td className="column-revenue">{props.revenue}</td>
-    </tr>
-
     const constructTableRow = (el, i) => {
       const revenue = Math.round(Number(el.revenue) * 100) / 100
-      return <TableRow
-        date={el.date}
-        impressions={el.impressions}
-        clicks={el.clicks}
-        revenue={`$${revenue}`}
-        hour={el.hour}
-        key={i}
-        className={`table-row-${i}`}
-      />
+      return this.tableRow({
+        date: el.date,
+        impressions: el.impressions,
+        clicks: el.clicks,
+        revenue: `$${revenue}`,
+        hour: el.hour,
+        key: i,
+        className: `table-row-${i}`,
+      })
     }
 
     const setupData = resp => {
@@ -55,26 +68,17 @@ class Events extends Component {
   }
 
   render () {
-    const TableRow = props => <tr onClick={() => this.setCharts(props.date, props.impressions, props.clicks, props.revenue, props.hour)}>
-      <td className="column-date"><Moment date={props.date} format="DD/MM/YYYY"/></td>
-      <td className="column-hour">{props.hour}</td>
-      <td className="column-impressions">{props.impressions}</td>
-      <td className="column-clicks">{props.clicks}</td>
-      <td className="column-revenue">{props.revenue}</td>
-    </tr>
-
     const constructTableRow = (el, i) => {
       const revenue = Math.round(Number(el.revenue) * 100) / 100
-      return <TableRow
-        date={el.date}
-        impressions={el.impressions}
-        clicks={el.clicks}
-        revenue={`$${revenue}`}
-        hour={el.hour}
-        key={i}
-        className={`table-row-${i}`}
-        onClick={() => this.setCharts(el.date, el.impressions, el.clicks, el.revenue, el.hour)}
-        />
+      return this.tableRow({
+        date: el.date,
+        impressions: el.impressions,
+        clicks: el.clicks,
+        revenue: `$${revenue}`,
+        hour: el.hour,
+        key: i,
+        className: `table-row-${i}`,
+      })
     }
 
 
@@ -113,6 +117,13 @@ class Events extends Component {
     return(
       <div className="stats-view">
         <div className="dataviz-view">
+          <div className="dataviz-view__chart-container">
+            {selectedView}
+          </div>
+          <div className="dataviz-view__dataviz-selector">
+            <Button bsStyle="primary">Time Series</Button>
+            <Button bsStyle="primary">Row Analysis</Button>
+          </div>
         </div>
         <DailyStatsTable />
       </div>

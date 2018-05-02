@@ -77,3 +77,15 @@ th.header-toggle {
 th.header-toggle:hover {
   background: #ddd;
 }
+
+.dataviz-view__chart-container {
+  min-height: 290px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid #555;
+}
+
+.dataviz-view__dataviz-selector {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
