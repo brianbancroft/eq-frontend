@@ -13,18 +13,19 @@ const RowStats = props => <div>
   <h1>Row Stats</h1>
 </div>
 
-let selectedView = <TimeSeries />
-
 class Events extends Component {
   setCharts(date, impressions, clicks, revenue, hour) {
     console.log('set charts called')
-    this.setState({renderSpecialCharts: true, specialChartData: {
-      hour: hour,
-      date: date,
-      clicks: clicks,
-      revenue: revenue,
-      impressions: impressions
-    }})
+    this.setState({
+      renderSpecialCharts: true,
+      specialChartData: {
+        hour: hour,
+        date: date,
+        clicks: clicks,
+        revenue: revenue,
+        impressions: impressions,
+      }
+    })
   }
 
   tableRow (props) {
@@ -35,6 +36,15 @@ class Events extends Component {
       <td className="column-clicks">{props.clicks}</td>
       <td className="column-revenue">{props.revenue}</td>
     </tr>
+  }
+
+  selectTimeSeries () {
+    console.log('method selectTimeSeries called')
+    this.setState({selectedView: <TimeSeries />})
+  }
+  selectRowStats () {
+    console.log('method selectRowStats called')
+    this.setState({selectedView: <RowStats />})
   }
 
   constructor (props) {
@@ -81,7 +91,6 @@ class Events extends Component {
       })
     }
 
-
     const setupData = resp => {
       this.setState({tableRows: resp.data.map(constructTableRow)})
       this.setState({chartData: { labels: resp.data.map(i => `${i.hour}h, ${i.clean_date}`), data: resp.data.map(i => i.events)}})
@@ -118,11 +127,11 @@ class Events extends Component {
       <div className="stats-view">
         <div className="dataviz-view">
           <div className="dataviz-view__chart-container">
-            {selectedView}
+            {this.state.selectedView}
           </div>
           <div className="dataviz-view__dataviz-selector">
-            <Button bsStyle="primary">Time Series</Button>
-            <Button bsStyle="primary">Row Analysis</Button>
+            <Button bsStyle="primary" onClick={() => this.selectTimeSeries()}>Time Series</Button>
+            <Button bsStyle="primary" onClick={() => this.selectRowStats()}>Row Analysis</Button>
           </div>
         </div>
         <DailyStatsTable />
