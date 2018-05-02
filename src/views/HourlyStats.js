@@ -4,6 +4,7 @@ import axios from 'axios'
 import Moment from 'react-moment'
 import BarChart from '../components/BarChart'
 import RowAnalysis from '../components/RowAnalysis'
+import DatavizSelector from '../components/DatavizSelector'
 
 class Events extends Component {
   setCharts (date, impressions, clicks, revenue, hour) {
@@ -138,14 +139,7 @@ class Events extends Component {
           <div className="dataviz-view__chart-container">
             {this.state.selectedView}
           </div>
-          <div className="dataviz-view__dataviz-selector">
-            <Button bsStyle="primary" onClick={() => selectTimeSeries('impressions')}>Total Impressions</Button>
-            <Button bsStyle="primary" onClick={() => selectTimeSeries('clicks')}>Total Clicks</Button>
-            <Button bsStyle="primary" onClick={() => selectTimeSeries('revenue')}>Total Revenue</Button>
-
-            <Button bsStyle="primary" onClick={() => selectTimeSeries()}>Clicks per Impression</Button>
-            <Button bsStyle="primary" onClick={() => selectTimeSeries()}>Average Revenue per Impression</Button>
-          </div>
+          <DatavizSelector selectTimeSeries={selectTimeSeries} />
         </div>
         <DailyStatsTable />
       </div>
