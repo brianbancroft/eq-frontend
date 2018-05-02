@@ -93,7 +93,7 @@ class Events extends Component {
 
     const DailyStatsTable = () =>
       <Row className="table-view table-view__weekly">
-        <h2>Daily Stats Table</h2>
+        <h2>Hourly Stats Table</h2>
         <Table striped bordered condensed hover>
           <thead>
             <tr>

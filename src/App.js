@@ -27,7 +27,7 @@ class App extends Component {
               <div className="link-container">
                 <div className="link events-link">
                   <Link to="/events/daily">
-                    Events
+                    Event Counts
                   </Link>
                 </div>
                 <div className="link-switch">
