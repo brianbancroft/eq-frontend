@@ -13,11 +13,21 @@ class Events extends Component {
 
     const TableRow = props => <tr>
       <td><Moment date={props.date} format="DD/MM/YYYY"/></td>
+      <td>{props.hour}</td>
       <td>{props.impressions}</td>
       <td>{props.clicks}</td>
       <td>{props.revenue}</td>
     </tr>
-    const constructTableRow = (el, i) => <TableRow date={el.date} impressions={el.impressions} clicks={el.clicks} revenue={el.clicks} key={i} />
+    const constructTableRow = (el, i) =>
+      <TableRow
+        date={el.date}
+        impressions={el.impressions}
+        clicks={el.clicks}
+        revenue={el.clicks}
+        hour={el.hour}
+        key={i}
+      />
+
     const setupData = resp => {
       this.setState({tableRows: resp.data.map(constructTableRow)})
       // TODO: Resolve date string issue:
@@ -25,7 +35,7 @@ class Events extends Component {
     }
 
     axios
-      .get('http://localhost:5555/stats/daily')
+      .get('http://localhost:5555/stats/hourly')
       .then(setupData)
   }
 
@@ -37,6 +47,7 @@ class Events extends Component {
           <thead>
             <tr>
               <th>Date</th>
+              <th>Hour</th>
               <th>Impressions</th>
               <th>Clicks</th>
               <th>Revenue</th>

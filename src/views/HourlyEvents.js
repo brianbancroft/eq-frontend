@@ -21,7 +21,7 @@ class Events extends Component {
     const setupData = resp => {
       this.setState({tableRows: resp.data.map(generateTablerow)})
       // TODO: Resolve date string issue:
-      this.setState({chartData: { labels: resp.data.map(i => i.date), data: resp.data.map(i => i.events)}})
+      this.setState({chartData: { labels: resp.data.map(i => i.clean_date), data: resp.data.map(i => i.events)}})
     }
 
     axios
