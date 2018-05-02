@@ -35,11 +35,17 @@
 }
 
 .table-view {
+  display: flex;
+  flex-direction: column;
   padding: 0 20px;
+  height: 500px;
+  border-top: 3px solid #555;
+  border-bottom: 3px solid #555;
+  overflow-y: scroll;
 }
 
 .dataviz-view {
-  min-height: 300px;
+  height: 30%;
 }
 
 .link-switch {
@@ -50,4 +56,17 @@
 
 .display-dot {
   width: 20%;
+}
+
+td.column-active {
+  font-weight: 500;
+}
+
+th.header-toggle {
+  cursor: pointer;
+  user-select: none;
+}
+
+th.header-toggle:hover {
+  background: #ddd;
 }

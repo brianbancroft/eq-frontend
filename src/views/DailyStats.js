@@ -50,6 +50,8 @@ class Events extends Component {
 
     return(
       <div className="stats-view">
+        <div className="dataviz-view">
+        </div>
         <DailyStatsTable />
       </div>
     )

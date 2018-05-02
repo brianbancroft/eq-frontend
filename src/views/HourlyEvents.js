@@ -20,7 +20,6 @@ class Events extends Component {
     const generateTablerow = (el, i) => <TableRow date={el.date} events={el.events} key={i} />
     const setupData = resp => {
       this.setState({tableRows: resp.data.map(generateTablerow)})
-      // TODO: Resolve date string issue:
       this.setState({chartData: { labels: resp.data.map(i => i.clean_date), data: resp.data.map(i => i.events)}})
     }
 
@@ -30,8 +29,6 @@ class Events extends Component {
   }
 
   render () {
-    const BackButton = props => <div className="back-button" onClick={() => this.props.history.push('/events')}>Go back to weekly view</div>
-
     const WeeklyEventsTable = () =>
       <Row className="table-view table-view__weekly">
         <h2>Daily Events Table</h2>
@@ -50,8 +47,9 @@ class Events extends Component {
 
     return(
       <div className="stats-view">
-        <BarChart chartData={this.state.chartData} />
-        <BackButton />
+        <div className="dataviz-view">
+          <BarChart chartData={this.state.chartData} />
+        </div>
         <WeeklyEventsTable />
       </div>
     )

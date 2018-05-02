@@ -47,7 +47,9 @@ class Events extends Component {
 
     return(
       <div className="stats-view">
-        <BarChart chartData={this.state.chartData} />
+        <div className="dataviz-view">
+          <BarChart chartData={this.state.chartData} />
+        </div>
         <WeeklyEventsTable />
       </div>
     )
