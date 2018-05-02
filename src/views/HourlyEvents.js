@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
-import { Row, Table } from 'react-bootstrap'
 import axios from 'axios'
 import Moment from 'react-moment'
 import BarChart from '../components/BarChart'
+import HourlyEventsTable from '../components/HourlyEventsTable';
 
 class Events extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      date: this.props.location.pathname.split('/events/')[1],
       tableRows: [],
     }
 
@@ -35,28 +34,12 @@ class Events extends Component {
   }
 
   render () {
-    const WeeklyEventsTable = () =>
-      <Row className="table-view table-view__weekly">
-        <h2>Daily Events Table</h2>
-        <Table striped bordered condensed hover>
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Events</th>
-            </tr>
-          </thead>
-          <tbody>
-            { this.state.tableRows }
-          </tbody>
-        </Table>
-      </Row>
-
     return(
       <div className="stats-view">
         <div className="dataviz-view">
           <BarChart chartData={this.state.chartData} />
         </div>
-        <WeeklyEventsTable />
+        <HourlyEventsTable tableRows={this.state.tableRows} />
       </div>
     )
   }

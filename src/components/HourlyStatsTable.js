@@ -1,7 +1,7 @@
 import React, { Component, } from 'react'
 import { Row, Table, } from 'react-bootstrap'
 
-class RowAnalysis extends Component {
+class HourlyStatsTable extends Component {
   render () {
     return(
       <Row className="table-view table-view__weekly">
@@ -25,4 +25,4 @@ class RowAnalysis extends Component {
   }
 }
 
-export default RowAnalysis
+export default HourlyStatsTable
