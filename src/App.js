@@ -19,7 +19,9 @@ class App extends Component {
           <Row>
             <Col xs={4} md={3} className="side-nav">
               <div className="site-title">
-                Maps and Tables!
+                <h3>Maps and Tables</h3>
+
+                <img src="https://cdn.brianbancroft.io/images/eqworks/scale.svg" alt="" srcset=""/>
               </div>
 
               <div className="link-container">

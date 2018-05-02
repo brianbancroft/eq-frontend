@@ -12,8 +12,11 @@
 
 .site-title {
   background: white;
-  height: 25%;
+  height: 28%;
   border-bottom: 2px solid #555;
+  display: flex;
+  flex-direction: column;
+  user-select: none;
 }
 
 .link-container {
@@ -56,6 +59,10 @@
 
 .display-dot {
   width: 20%;
+}
+
+.divider-dot {
+  user-select: none;
 }
 
 td.column-active {
