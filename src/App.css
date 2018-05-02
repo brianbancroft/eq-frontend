@@ -89,8 +89,21 @@ th.header-toggle:hover {
   flex-direction: row;
   overflow-x: scroll;
   justify-content: space-around;
+  padding-bottom: 15px;
+  scroll-behavior: initial;
 }
 
 .dataviz-view__dataviz-selector button {
   margin-right: 30px;
+}
+
+.stats-row-analysis {
+  border-top: 1px double #555;
+  border-left: 80px solid #555;
+  padding-left: 10px;
+  padding-right: 50px;
+}
+
+.badge-analysis.badge {
+  font-size: 18px;
 }

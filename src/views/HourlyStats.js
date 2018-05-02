@@ -7,6 +7,8 @@ import RowAnalysis from '../components/RowAnalysis'
 
 class Events extends Component {
   setCharts(date, impressions, clicks, revenue, hour) {
+    const revenuePerImpression = (revenue, impression) => Math.round(Number(revenue) / Number(impressions) * 10000) / 10000
+
     this.setState({
       renderSpecialCharts: true,
       selectedView: <RowAnalysis
@@ -15,6 +17,7 @@ class Events extends Component {
         clicks={clicks}
         revenue={revenue}
         impressions={impressions}
+        revenuePerImpression={revenuePerImpression(revenue, impressions)}
       />,
     })
   }
@@ -25,7 +28,7 @@ class Events extends Component {
       <td className="column-hour">{props.hour}</td>
       <td className="column-impressions">{props.impressions}</td>
       <td className="column-clicks">{props.clicks}</td>
-      <td className="column-revenue">{props.revenue}</td>
+      <td className="column-revenue">${props.revenue}</td>
     </tr>
   }
 
@@ -43,7 +46,7 @@ class Events extends Component {
         date: el.date,
         impressions: el.impressions,
         clicks: el.clicks,
-        revenue: `$${revenue}`,
+        revenue: revenue,
         hour: el.hour,
         key: i,
         className: `table-row-${i}`,
@@ -130,7 +133,6 @@ class Events extends Component {
 
             <Button bsStyle="primary" onClick={() => selectTimeSeries()}>Clicks per Impression</Button>
             <Button bsStyle="primary" onClick={() => selectTimeSeries()}>Average Revenue per Impression</Button>
-            <Button bsStyle="primary">Row Analysis</Button>
           </div>
         </div>
         <DailyStatsTable />
