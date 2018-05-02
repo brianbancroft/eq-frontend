@@ -23,7 +23,7 @@ class Stats extends Component {
       ChartContent = <Bar
         data={data}
         width={800}
-        height={400}
+        height={300}
         options={{
           maintainAspectRatio: false,
           responsive: false

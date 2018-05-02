@@ -48,7 +48,7 @@
 }
 
 .dataviz-view {
-  height: 30%;
+  min-height: 330px;
 }
 
 .link-switch {
