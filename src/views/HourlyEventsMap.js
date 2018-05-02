@@ -12,7 +12,7 @@ class HourlyEventsMap extends Component {
     this.map = new mapboxgl.Map({
       container: this.mapContainer,
       style: mapStyle,
-      center: [-98.8067489, 49.0719174],
+      center: [-98.8067489, 49.0719174,],
       zoom: 3,
     })
   }

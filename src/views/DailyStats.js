@@ -1,14 +1,13 @@
-import React, { Component } from 'react'
-import { Row, Table } from 'react-bootstrap'
+import React, { Component, } from 'react'
+import { Row, Table, } from 'react-bootstrap'
 import axios from 'axios'
 import Moment from 'react-moment'
-// import BarChart from './BarChart'
 
 class Events extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      tableRows: []
+      tableRows: [],
     }
 
     const TableRow = props => <tr>

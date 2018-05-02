@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
-import { Grid, Row, Col } from 'react-bootstrap'
+import React, { Component, } from 'react'
+import { BrowserRouter as Router, Route, Link, } from 'react-router-dom'
+import { Grid, Row, Col, } from 'react-bootstrap'
 
 import './App.css'
 
