@@ -1,10 +1,11 @@
 import React, { Component, } from 'react'
-import { Row, Table, Button, } from 'react-bootstrap'
+import { Button, } from 'react-bootstrap'
 import axios from 'axios'
 import Moment from 'react-moment'
 import BarChart from '../components/BarChart'
 import RowAnalysis from '../components/RowAnalysis'
 import DatavizSelector from '../components/DatavizSelector'
+import HourlyStatsTable from '../components/HourlyStatsTable'
 
 class Events extends Component {
   setCharts (date, impressions, clicks, revenue, hour) {
@@ -94,7 +95,6 @@ class Events extends Component {
       })
     }
 
-
     const selectTimeSeries = () => this.setState({selectedView: <TimeSeries />,})
 
     const setupData = resp => {
@@ -114,25 +114,6 @@ class Events extends Component {
         .then(setupData)
     }
 
-    const DailyStatsTable = () =>
-      <Row className="table-view table-view__weekly">
-        <h2>Hourly Stats Table</h2>
-        <Table striped bordered condensed hover>
-          <thead>
-            <tr>
-              <th className="header-toggle column-date" onClick={() => sortColumn('date, hour')}>Date</th>
-              <th className="header-toggle column-hour" onClick={() => sortColumn('date, hour')}>Hour</th>
-              <th className="header-toggle column-impressions" onClick={() => sortColumn('impressions')}>Impressions</th>
-              <th className="header-toggle column-clicks" onClick={() => sortColumn('clicks')}>Clicks</th>
-              <th className="header-toggle column-revenue" onClick={() => sortColumn('revenue')}>Revenue</th>
-            </tr>
-          </thead>
-          <tbody>
-            { this.state.tableRows }
-          </tbody>
-        </Table>
-      </Row>
-
     return(
       <div className="stats-view">
         <div className="dataviz-view">
@@ -141,7 +122,10 @@ class Events extends Component {
           </div>
           <DatavizSelector selectTimeSeries={selectTimeSeries} />
         </div>
-        <DailyStatsTable />
+        <HourlyStatsTable
+          tableRows={this.state.tableRows}
+          sortColumn={sortColumn}
+        />
       </div>
     )
   }
