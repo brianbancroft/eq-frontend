@@ -34,7 +34,7 @@
     "quotes": [2, "single"],
     "space-before-function-paren": [2, {
       "anonymous": "always",
-      "named": "never"
+      "named": "always"
     }],
     "strict": [2, "global"]
   },
