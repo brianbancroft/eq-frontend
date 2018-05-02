@@ -51,6 +51,8 @@ class Events extends Component {
     return(
       <div className="stats-view">
         <div className="dataviz-view">
+          <h2>Daily Stats View</h2>
+          Note: The charts and row summaries for this section are not implemented.
         </div>
         <DailyStatsTable />
       </div>
