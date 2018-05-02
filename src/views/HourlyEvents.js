@@ -19,8 +19,14 @@ class Events extends Component {
 
     const generateTablerow = (el, i) => <TableRow date={el.date} events={el.events} key={i} />
     const setupData = resp => {
-      this.setState({tableRows: resp.data.map(generateTablerow)})
-      this.setState({chartData: { labels: resp.data.map(i => i.clean_date), data: resp.data.map(i => i.events)}})
+      this.setState({
+        chartData: {
+          labels: resp.data.map(i => i.clean_date),
+          data: resp.data.map(i => i.events),
+          subject: 'events',
+        },
+        tableRows: resp.data.map(generateTablerow),
+      })
     }
 
     axios

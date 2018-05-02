@@ -63,7 +63,13 @@ class Events extends Component {
 
     const setupData = resp => {
       this.setState({tableRows: resp.data.map(constructTableRow),})
-      this.setState({chartData: { labels: resp.data.map(i => `${i.hour}h, ${i.clean_date}`), data: resp.data.map(i => i['impressions']),},})
+      this.setState({
+        chartData: {
+          labels: resp.data.map(i => `${i.hour}h, ${i.clean_date}`),
+          data: resp.data.map(i => i['impressions']),
+          subject: 'impressions',
+        },
+      })
     }
 
     axios
